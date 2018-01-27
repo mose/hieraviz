@@ -127,40 +127,40 @@ module HieravizApp
       end
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/nodes} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/nodes} do |base|
       @username = check_authorization
       hieracles_config = prepare_config(base)
       @nodes = Hieracles::Registry.nodes(hieracles_config)
       erb :nodes
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/farms} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/farms} do |base|
       @username = check_authorization
       hieracles_config = prepare_config(base)
       @farms = Hieracles::Registry.farms_counted(hieracles_config, base)
       erb :farms
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/modules} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/modules} do |base|
       prepare_config(base)
       @username = check_authorization
       erb :modules
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/resources} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/resources} do |base|
       prepare_config(base)
       @username = check_authorization
       erb :resources
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/user} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/user} do |base|
       prepare_config(base)
       @username = check_authorization
       @userinfo = session[:access_token] ? userinfo : {}
       erb :user
     end
 
-    get %r{^/([-_\.a-zA-Z0-9]+)$} do |base|
+    get %r{/([-_\.a-zA-Z0-9]+)} do |base|
       prepare_config(base)
       @username = username
       erb :home

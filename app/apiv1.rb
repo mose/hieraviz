@@ -74,81 +74,81 @@ module HieravizApp
       200
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/nodes} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/nodes} do |base|
       check_authorization
       hieracles_config = prepare_config(base)
       json Hieracles::Registry.nodes(hieracles_config)
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/info} do |base, node|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/info} do |base, node|
       check_authorization
       hieracles_config = prepare_config(base)
       node = Hieracles::Node.new(node, hieracles_config)
       json node.info
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/params} do |base, node|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/params} do |base, node|
       check_authorization
       hieracles_config = prepare_config(base, node)
       node = Hieracles::Node.new(node, hieracles_config)
       json node.params
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/allparams} do |base, node|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/allparams} do |base, node|
       check_authorization
       hieracles_config = prepare_config(base, node)
       node = Hieracles::Node.new(node, hieracles_config)
       json node.params(false)
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/facts} do |base, node|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/facts} do |base, node|
       check_authorization
       facts = get_facts(base, node)
       json facts.read
     end
 
-    post %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/facts} do |base, node|
+    post %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/facts} do |base, node|
       check_authorization
       facts = get_facts(base, node)
       data = JSON.parse(request.body.read.to_s)
       json facts.write(data)
     end
 
-    delete %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/facts} do |base, node|
+    delete %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/facts} do |base, node|
       check_authorization
       facts = get_facts(base, node)
       json facts.remove
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)$} do |base, node|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)} do |base, node|
       check_authorization
       hieracles_config = prepare_config(base, node)
       node = Hieracles::Node.new(node, hieracles_config)
       json node.params
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/farms} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/farms} do |base|
       check_authorization
       cross_origin
       hieracles_config = prepare_config(base)
       json Hieracles::Registry.farms_counted(hieracles_config, base, true)
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/modules} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/modules} do |base|
       check_authorization
       cross_origin
       hieracles_config = prepare_config(base)
       json Hieracles::Registry.modules(hieracles_config, base, true)
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/vars} do |base|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/vars} do |base|
       check_authorization
       hieracles_config = prepare_config(base)
       hiera = Hieracles::Hiera.new(hieracles_config)
       json hiera.params
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/hierarchy} do |base, node|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/node/([-_\.a-zA-Z0-9]+)/hierarchy} do |base, node|
       check_authorization
       hieracles_config = prepare_config(base, node)
       hiera = Hieracles::Hiera.new(hieracles_config)
@@ -165,7 +165,7 @@ module HieravizApp
       json res
     end
 
-    get %r{^/?([-_\.a-zA-Z0-9]+)?/farm/([-_\.a-zA-Z0-9]+)$} do |base, farm|
+    get %r{/?([-_\.a-zA-Z0-9]+)?/farm/([-_\.a-zA-Z0-9]+)} do |base, farm|
       # check_authorization
       cross_origin
       hieracles_config = prepare_config(base)

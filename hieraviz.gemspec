@@ -43,4 +43,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler-audit'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'reek'
+  spec.add_development_dependency 'rack-test'
 end

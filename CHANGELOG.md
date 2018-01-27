@@ -1,6 +1,10 @@
 Hieraviz Changelog
 ========================
 
+### v0.2.6 - 2018-01-27
+- security update on yajl-ruby
+- update new regexps due to mustermann upgarde
+
 ### v0.2.5 - 2016-12-30
 - update hieracles lib
 
